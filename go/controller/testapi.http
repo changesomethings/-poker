@@ -4,6 +4,7 @@ Content-Type: application/json
 {
         "Person": 6,
             "PlayerAction": ["1", "all","2","fold"],
-                "Hand": ["A5", "10C"],
+             "Hand": ["HA", "CA"],
                     "PublicCards": []
+                    
 }

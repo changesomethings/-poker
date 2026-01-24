@@ -5,7 +5,7 @@ var SuitMap=map[string]int{
    "D":2,
    "H":3,
 }
-var Number=map[string]int{
+var NumberMap=map[string]int{
 	"2":2,
 	"3":3,
 	"4":4,

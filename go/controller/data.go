@@ -5,16 +5,20 @@ import (
 	"poker/model"
 	"poker/model/httpModel"
 	"poker/service"
+	"poker/utils"
 )
 func Begining(cal*httpModel.CalData)float32{
 	var req float32
-	
+	 Hand:=cal.Hand
+	 dealHand:=utils.DealMap(Hand)
+     dealPublic:=utils.DealMap(cal.PublicCards)
+	 fmt.Println(dealHand)
 	win:=float32(0)
 	beginner:=&model.Begin{}
-	beginner.Hand=[]int{58,59}
+	beginner.Hand=dealHand
 	beginner.Id=0
-	beginner.PublicCard=[]int{}
-	beginner.Person=6
+	beginner.PublicCard=dealPublic
+	beginner.Person=cal.Person
     beginner.Frequency=50000
 	result:=func(s float32){
 		win+=s
@@ -22,7 +26,7 @@ func Begining(cal*httpModel.CalData)float32{
 	for i:=0;i<beginner.Frequency;i++{
 		service.GameMain(beginner,result)
 	}
-	req=(float32(win)/float32(beginner.Frequency))
+	req=(float32(win)/float32(beginner.Frequency))*100
 	fmt.Println(req)
     return req
 }
