@@ -11,6 +11,10 @@ import (
 )
 func Begining(cal*httpModel.CalData)float32{
 	start:=time.Now()
+	 stats:=&model.Stats{}
+	 record:=func(score int){
+		service.Note(stats,score)
+	 }
 	var req float32
 	 Hand:=cal.Cards.Hand
 	 dealHand:=utils.DealMap(Hand)
@@ -37,7 +41,7 @@ func Begining(cal*httpModel.CalData)float32{
 			var single float32
 			service.GameMain(beginner,func(s float32){
 				single+=s
-			})
+			},record)
 			chanResult <- single
 		  }
 		}(w)
@@ -57,7 +61,9 @@ func Begining(cal*httpModel.CalData)float32{
 	 }
 	req=(float32(win)/float32(beginner.Frequency))*100
 	fmt.Println(req)
+	fmt.Println(stats)
 	end:=time.Since(start)
     fmt.Println(end)
+
     return req
 }
